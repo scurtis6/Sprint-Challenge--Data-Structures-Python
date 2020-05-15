@@ -7,13 +7,23 @@ class RingBuffer:
         self.current = 0
 
     def append(self, item):
-        if self.storage.length <self.capacity:
+        # if length is less than capacity
+        if self.storage.length < self.capacity:
+            # add item to the tail
             self.storage.add_to_tail(item)
-            self.current = self.current.tail
+            # set current to current the tail
+            self.current = self.storage.tail
+        # if current is tail
+        if self.current == self.storage.tail:
+            # set current to the head
+            self.current = self.storage.head
+        # if current is head
+        # elif self.current == self.storage.head:
+        else:
+            # set the current to the next value
+            self.current = self.current.next
+        self.current.value = item
 
-
-    # need another method??
-  
     def get(self):
         # make a list
         list_ring_buffer = []
